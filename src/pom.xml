@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>easypeasyRPC - a JSON-RPC 2.0 library</name>
+    <description>This library is an implementation of JSON-RPC 2.0 specification found at this link: http://www.jsonrpc.org/specification
+    </description>
+    <groupId>com.github.dadekuma.easypeasyrpc</groupId>
+    <url>https://github.com/DadeKuma/easypeasyRPC</url>
+    <artifactId>EasyPeasyRPC</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <scm>
+        <connection>scm:git:git://github.com/DadeKuma/easypeasyRPC.git</connection>
+        <developerConnection>scm:git:ssh://github.com:DadeKuma/easypeasyRPC.git</developerConnection>
+        <url>http://github.com/DadeKuma/easypeasyRPC/tree/master</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>Davide Matta</name>
+            <email>mattafix68@gmail.com</email>
+            <organization>DadeKuma</organization>
+            <organizationUrl>https://github.com/DadeKuma</organizationUrl>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+    
+</project>
