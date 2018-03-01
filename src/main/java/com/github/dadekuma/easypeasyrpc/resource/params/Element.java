@@ -10,8 +10,7 @@ public class Element{
     public Element(Object o){
         value = new Gson().toJsonTree(o);
     }
-
-    public Element(Object[] o){
+    public Element(Object... o){
         value = new Gson().toJsonTree(o);
     }
 
@@ -35,11 +34,6 @@ public class Element{
     public boolean isJsonArray() { return value.isJsonArray(); }
     public boolean isJsonObject() { return  value.isJsonObject(); }
     public boolean isJsonPrimitive() {return  value.isJsonPrimitive(); }
-
-    @Override
-    public String toString() {
-        return value.toString();
-    }
 
     public int size() {
         if(value.isJsonArray())
