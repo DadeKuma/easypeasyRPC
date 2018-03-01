@@ -2,8 +2,6 @@ package com.github.dadekuma.easypeasyrpc.resource.params;
 
 import com.github.dadekuma.easypeasyrpc.exception.ParameterOutOfBoundException;
 import com.github.dadekuma.easypeasyrpc.exception.message.GenericExceptionMessage;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 
 public class ParameterList {
     private final Element parameters;
@@ -20,10 +18,6 @@ public class ParameterList {
         if(parameters.isJsonArray())
             return new Element(parameters.getAsJsonArray().get(index));
         return parameters;
-    }
-
-    public JsonElement getParametersAsJsonElement(){
-        return new Gson().toJsonTree(parameters);
     }
 
     public Element getParameters(){

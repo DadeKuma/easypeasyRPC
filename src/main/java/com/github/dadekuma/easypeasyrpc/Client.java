@@ -4,13 +4,12 @@ import com.github.dadekuma.easypeasyrpc.exception.CommunicatorException;
 import com.github.dadekuma.easypeasyrpc.exception.ErrorException;
 import com.github.dadekuma.easypeasyrpc.exception.message.GenericExceptionMessage;
 import com.github.dadekuma.easypeasyrpc.resource.Communicator;
-import com.github.dadekuma.easypeasyrpc.resource.params.Element;
+import com.github.dadekuma.easypeasyrpc.resource.Request;
+import com.github.dadekuma.easypeasyrpc.resource.Response;
 import com.github.dadekuma.easypeasyrpc.resource.params.ParameterList;
 import com.github.dadekuma.easypeasyrpc.serialization.RequestSerializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.github.dadekuma.easypeasyrpc.resource.Request;
-import com.github.dadekuma.easypeasyrpc.resource.Response;
 
 import java.util.concurrent.TimeoutException;
 
@@ -32,12 +31,12 @@ public class Client {
                 .create();
     }
 
-    public Element fulfillRequest(String methodName, ParameterList params) throws ErrorException, TimeoutException {
+    public Response fulfillRequest(String methodName, ParameterList params) throws ErrorException, TimeoutException {
         try {
             Request request = new Request(methodName, params, requestNumber.toString(), JsonRPCManager.RPC_VERSION);
             sendRequest(request);
             if (!request.isNotification()) {
-                return new Element(receiveResponse());
+                return receiveResponse();
             }
         } catch (CommunicatorException e) {
             e.printStackTrace();

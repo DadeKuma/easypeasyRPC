@@ -51,8 +51,7 @@ public class ClientTest {
 
     @Test
     public void fulfillRequestMultipleParams() throws ErrorException, TimeoutException {
-        Object[] objParams = new Object[] {1, "hello", 3.2f, true};
-        Element params = new Element(objParams);
+        Element params = new Element(1, "hello", 3.2f, true);
         ParameterList parameterList = new ParameterList(params);
         String methodName = "hello";
 
@@ -66,8 +65,7 @@ public class ClientTest {
 
     @Test
     public void fulfillMultipleSequentialRequest() throws ErrorException, TimeoutException{
-        Object[] objParams = new Object[] {1, "hello", 3.2f, true};
-        Element params = new Element(objParams);
+        Element params = new Element(1, "hello", 3.2f, true);
         ParameterList parameterList = new ParameterList(params);
         String methodName = "hello";
 

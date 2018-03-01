@@ -1,11 +1,11 @@
 package com.github.dadekuma.easypeasyrpc.serialization;
 
+import com.github.dadekuma.easypeasyrpc.JsonRPCManager;
+import com.github.dadekuma.easypeasyrpc.resource.Request;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import com.github.dadekuma.easypeasyrpc.JsonRPCManager;
-import com.github.dadekuma.easypeasyrpc.resource.Request;
 
 import java.lang.reflect.Type;
 

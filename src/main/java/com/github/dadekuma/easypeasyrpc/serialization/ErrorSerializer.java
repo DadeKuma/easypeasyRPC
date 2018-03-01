@@ -1,10 +1,10 @@
 package com.github.dadekuma.easypeasyrpc.serialization;
 
+import com.github.dadekuma.easypeasyrpc.resource.error.Error;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import com.github.dadekuma.easypeasyrpc.resource.error.Error;
 
 import java.lang.reflect.Type;
 
