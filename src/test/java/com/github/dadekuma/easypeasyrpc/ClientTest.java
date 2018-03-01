@@ -11,12 +11,12 @@ import java.util.concurrent.TimeoutException;
 public class ClientTest {
 
     private static DummyCommunicator dummyCommunicator;
-    private static Client client;
+    private static DummyClient client;
 
     @Before
     public void setUpBefore(){
         dummyCommunicator = new DummyCommunicator();
-        client = new Client(dummyCommunicator);
+        client = new DummyClient(dummyCommunicator);
     }
 
     @Test
