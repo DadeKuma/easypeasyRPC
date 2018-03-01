@@ -13,7 +13,7 @@ import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeoutException;
 
-public class Client {
+public abstract class Client {
 
     private final Gson gson;
     private Communicator communicator;
