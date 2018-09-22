@@ -1,12 +1,12 @@
 package com.github.dadekuma.easypeasyrpc;
 
-import com.github.dadekuma.easypeasyrpc.resource.Communicator;
+import com.github.dadekuma.easypeasyrpc.resource.RpcCommunicator;
 
-public class DummyClient extends Client {
+public class DummyClient extends RpcClient {
     public DummyClient() {
     }
 
-    public DummyClient(Communicator communicator) {
+    public DummyClient(RpcCommunicator communicator) {
         super(communicator);
     }
 }

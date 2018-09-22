@@ -1,7 +1,7 @@
 package com.github.dadekuma.easypeasyrpc.resource.method;
 
 import com.github.dadekuma.easypeasyrpc.exception.message.GenericExceptionMessage;
-import com.github.dadekuma.easypeasyrpc.exception.message.RPCExceptionMessage;
+import com.github.dadekuma.easypeasyrpc.exception.message.RpcExceptionMessage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +31,7 @@ public class MethodList {
 
     public MethodList addMethod(String methodName, Integer[] numberOfParameters){
         if (methodName.startsWith("rpc.")) {
-            throw new IllegalArgumentException(RPCExceptionMessage.BAD_METHOD_NAME.toString());
+            throw new IllegalArgumentException(RpcExceptionMessage.BAD_METHOD_NAME.toString());
         }
         for(Integer i : numberOfParameters){
             if(i < 0)

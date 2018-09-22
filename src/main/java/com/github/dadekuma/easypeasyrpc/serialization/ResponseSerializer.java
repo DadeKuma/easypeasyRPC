@@ -1,7 +1,6 @@
 package com.github.dadekuma.easypeasyrpc.serialization;
 
-import com.github.dadekuma.easypeasyrpc.JsonRPCManager;
-import com.github.dadekuma.easypeasyrpc.resource.Response;
+import com.github.dadekuma.easypeasyrpc.resource.RpcResponse;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
@@ -9,11 +8,11 @@ import com.google.gson.JsonSerializer;
 
 import java.lang.reflect.Type;
 
-public class ResponseSerializer implements JsonSerializer<Response>{
+public class ResponseSerializer implements JsonSerializer<RpcResponse>{
     @Override
-    public JsonElement serialize(Response response, Type type, JsonSerializationContext jsonSerializationContext) {
+    public JsonElement serialize(RpcResponse response, Type type, JsonSerializationContext jsonSerializationContext) {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("jsonrpc", JsonRPCManager.RPC_VERSION);
+        jsonObject.addProperty("jsonrpc", com.github.dadekuma.easypeasyrpc.RpcManager.RPC_VERSION);
 
         if (response.getError() != null) {
             jsonObject.add("error", jsonSerializationContext.serialize(response.getError()));

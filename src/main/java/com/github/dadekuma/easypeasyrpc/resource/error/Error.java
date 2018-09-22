@@ -16,7 +16,7 @@ public class Error {
                 setParams(-32700, "Parse error");
                 break;
             case INVALID_REQUEST:
-                setParams(-32600, "Invalid Request");
+                setParams(-32600, "Invalid RpcRequest");
                 break;
             case METHOD_NOT_FOUND:
                 setParams(-32601, "Method not found");

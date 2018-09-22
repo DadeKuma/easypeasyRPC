@@ -6,11 +6,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class JsonRPC_BatchTest {
-    private static JsonRPCManager jsonRPCManager;
+    private static RpcManager jsonRPCManager;
     @BeforeClass
     public static void setUpBeforeClass(){
         DummyMethodPerformer methodPerformerTest = new DummyMethodPerformer();
-        jsonRPCManager = new JsonRPCManager(methodPerformerTest);
+        jsonRPCManager = new RpcManager(methodPerformerTest);
         jsonRPCManager.setMethodList(methodPerformerTest.getMethodList());
     }
 
@@ -20,9 +20,9 @@ public class JsonRPC_BatchTest {
         JsonElement jsonResponse = jsonRPCManager.parseRequest(testRequest);
         String stringResponse = jsonResponse.toString();
         String expectedResponse = "["+
-                "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request\"},\"id\":null}," +
-                "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request\"},\"id\":null}," +
-                "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request\"},\"id\":null}" +
+                "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid RpcRequest\"},\"id\":null}," +
+                "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid RpcRequest\"},\"id\":null}," +
+                "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid RpcRequest\"},\"id\":null}" +
                 "]";
         Assert.assertEquals(expectedResponse, stringResponse);
     }
@@ -47,8 +47,8 @@ public class JsonRPC_BatchTest {
                 "{\"jsonrpc\":\"2.0\",\"result\":{\"value\":1},\"id\":\"1\"}," +
                 "{\"jsonrpc\":\"2.0\",\"result\":{\"value\":999},\"id\":\"2\"}," +
                 "{\"jsonrpc\":\"2.0\",\"result\":{\"value\":\"hey\"},\"id\":\"3\"}," +
-                "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request\"},\"id\":null}," +
-                "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request\"},\"id\":null}," +
+                "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid RpcRequest\"},\"id\":null}," +
+                "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid RpcRequest\"},\"id\":null}," +
                 "{\"jsonrpc\":\"2.0\",\"result\":{\"value\":1},\"id\":\"5\"}," +
                 "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32602,\"message\":\"Invalid params\"},\"id\":\"6\"}," +
                 "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32602,\"message\":\"Invalid params\"},\"id\":\"7\"}," +

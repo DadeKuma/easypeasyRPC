@@ -6,11 +6,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class JsonRPC_ParametersTest {
-    private static JsonRPCManager jsonRPCManager;
+    private static RpcManager jsonRPCManager;
     @BeforeClass
     public static void setUpBeforeClass(){
         DummyMethodPerformer methodPerformerTest = new DummyMethodPerformer();
-        jsonRPCManager = new JsonRPCManager(methodPerformerTest);
+        jsonRPCManager = new RpcManager(methodPerformerTest);
         jsonRPCManager.setMethodList(methodPerformerTest.getMethodList());
     }
     @Test

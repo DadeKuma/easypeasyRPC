@@ -1,8 +1,8 @@
 package com.github.dadekuma.easypeasyrpc;
 
-import com.github.dadekuma.easypeasyrpc.resource.Communicator;
+import com.github.dadekuma.easypeasyrpc.resource.RpcCommunicator;
 
-public class DummyCommunicator implements Communicator {
+public class DummyCommunicator implements RpcCommunicator {
     public String sentMessage;
 
     @Override

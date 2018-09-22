@@ -6,11 +6,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class JsonRPC_MalformedRequestTest {
-    private static JsonRPCManager jsonRPCManager;
+    private static RpcManager jsonRPCManager;
     @BeforeClass
     public static void setUpBeforeClass(){
         DummyMethodPerformer methodPerformerTest = new DummyMethodPerformer();
-        jsonRPCManager = new JsonRPCManager(methodPerformerTest);
+        jsonRPCManager = new RpcManager(methodPerformerTest);
         jsonRPCManager.setMethodList(methodPerformerTest.getMethodList());
     }
     @Test
@@ -18,7 +18,7 @@ public class JsonRPC_MalformedRequestTest {
         String testRequest = "{\"jsonrpc\":\"100\",\"method\":\"returnBiggest\",\"params\":{\"parameters\":{\"value\":[200,100]}},\"id\":\"0\"}";
         JsonElement jsonResponse = jsonRPCManager.parseRequest(testRequest);
         String stringResponse = jsonResponse.toString();
-        String expectedResponse = "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request\"},\"id\":null}";
+        String expectedResponse = "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid RpcRequest\"},\"id\":null}";
         Assert.assertEquals(expectedResponse, stringResponse);
     }
 
@@ -27,7 +27,7 @@ public class JsonRPC_MalformedRequestTest {
         String testRequest = "{\"jsonrpc\": null, \"method\": \"something\", \"id\": \"1\"}";
         JsonElement jsonResponse = jsonRPCManager.parseRequest(testRequest);
         String stringResponse = jsonResponse.toString();
-        String expectedResponse = "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request\"},\"id\":null}";
+        String expectedResponse = "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid RpcRequest\"},\"id\":null}";
         Assert.assertEquals(expectedResponse, stringResponse);
     }
 
@@ -72,7 +72,7 @@ public class JsonRPC_MalformedRequestTest {
         String testRequest = "";
         JsonElement jsonResponse = jsonRPCManager.parseRequest(testRequest);
         String stringResponse = jsonResponse.toString();
-        String expectedResponse = "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request\"},\"id\":null}";
+        String expectedResponse = "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid RpcRequest\"},\"id\":null}";
         Assert.assertEquals(expectedResponse, stringResponse);
     }
 
@@ -81,7 +81,7 @@ public class JsonRPC_MalformedRequestTest {
         String testRequest = null;
         JsonElement jsonResponse = jsonRPCManager.parseRequest(testRequest);
         String stringResponse = jsonResponse.toString();
-        String expectedResponse = "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request\"},\"id\":null}";
+        String expectedResponse = "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid RpcRequest\"},\"id\":null}";
         Assert.assertEquals(expectedResponse, stringResponse);
     }
 
@@ -90,7 +90,7 @@ public class JsonRPC_MalformedRequestTest {
         String testRequest = "{\"jsonrpc\":\"2.0\",\"nope\":nope,\"id\":\"2\"}";
         JsonElement jsonResponse = jsonRPCManager.parseRequest(testRequest);
         String stringResponse = jsonResponse.toString();
-        String expectedResponse = "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid Request\"},\"id\":null}";
+        String expectedResponse = "{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Invalid RpcRequest\"},\"id\":null}";
         Assert.assertEquals(expectedResponse, stringResponse);
     }
 }
