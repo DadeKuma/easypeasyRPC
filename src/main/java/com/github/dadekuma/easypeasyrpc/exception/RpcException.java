@@ -1,26 +1,26 @@
 package com.github.dadekuma.easypeasyrpc.exception;
 
-import com.github.dadekuma.easypeasyrpc.resource.error.Error;
-import com.github.dadekuma.easypeasyrpc.resource.error.ErrorType;
+import com.github.dadekuma.easypeasyrpc.resource.error.RpcError;
+import com.github.dadekuma.easypeasyrpc.resource.error.RpcErrorType;
 
 public class RpcException extends Exception{
-    private ErrorType errorType;
+    private RpcErrorType errorType;
 
-    public RpcException(ErrorType errorType) {
+    public RpcException(RpcErrorType errorType) {
         this(errorType, null);
     }
 
 
-    public RpcException(ErrorType errorType, Throwable cause) {
+    public RpcException(RpcErrorType errorType, Throwable cause) {
         super(cause);
         this.errorType = errorType;
     }
 
-    public Error getError() {
-        return new Error(errorType);
+    public RpcError getError() {
+        return new RpcError(errorType);
     }
 
-    public ErrorType getErrorType(){
+    public RpcErrorType getErrorType(){
         return errorType;
     }
 }

@@ -1,8 +1,8 @@
 package com.github.dadekuma.easypeasyrpc;
 
 import com.github.dadekuma.easypeasyrpc.exception.ErrorException;
-import com.github.dadekuma.easypeasyrpc.resource.params.Element;
-import com.github.dadekuma.easypeasyrpc.resource.params.ParameterList;
+import com.github.dadekuma.easypeasyrpc.resource.params.RpcElement;
+import com.github.dadekuma.easypeasyrpc.resource.params.RpcParameterList;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,8 +22,8 @@ public class ClientTest {
     @Test
     public void fulfillRequestPrimitiveParam() throws ErrorException, TimeoutException {
         int parameter = 1;
-        Element params = new Element(parameter);
-        ParameterList parameterList = new ParameterList(params);
+        RpcElement params = new RpcElement(parameter);
+        RpcParameterList parameterList = new RpcParameterList(params);
         String methodName = "hello";
 
         client.fulfillRequest(methodName, parameterList);
@@ -37,8 +37,8 @@ public class ClientTest {
     @Test
     public void fulfillRequestOneClassParam() throws ErrorException, TimeoutException {
         DummyClass dummyParameter = new DummyClass(10);
-        Element params = new Element(dummyParameter);
-        ParameterList parameterList = new ParameterList(params);
+        RpcElement params = new RpcElement(dummyParameter);
+        RpcParameterList parameterList = new RpcParameterList(params);
         String methodName = "hello";
 
         client.fulfillRequest(methodName, parameterList);
@@ -51,8 +51,8 @@ public class ClientTest {
 
     @Test
     public void fulfillRequestMultipleParams() throws ErrorException, TimeoutException {
-        Element params = new Element(1, "hello", 3.2f, true);
-        ParameterList parameterList = new ParameterList(params);
+        RpcElement params = new RpcElement(1, "hello", 3.2f, true);
+        RpcParameterList parameterList = new RpcParameterList(params);
         String methodName = "hello";
 
         client.fulfillRequest(methodName, parameterList);
@@ -65,8 +65,8 @@ public class ClientTest {
 
     @Test
     public void fulfillMultipleSequentialRequest() throws ErrorException, TimeoutException{
-        Element params = new Element(1, "hello", 3.2f, true);
-        ParameterList parameterList = new ParameterList(params);
+        RpcElement params = new RpcElement(1, "hello", 3.2f, true);
+        RpcParameterList parameterList = new RpcParameterList(params);
         String methodName = "hello";
 
         client.fulfillRequest(methodName, parameterList);
@@ -77,8 +77,8 @@ public class ClientTest {
         Assert.assertEquals(dummyCommunicator.sentMessage, expectedStringRequest);
 
 
-        params = new Element(1234);
-        parameterList = new ParameterList(params);
+        params = new RpcElement(1234);
+        parameterList = new RpcParameterList(params);
         methodName = "no";
 
         client.fulfillRequest(methodName, parameterList);

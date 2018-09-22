@@ -1,14 +1,14 @@
 package com.github.dadekuma.easypeasyrpc.resource;
 
-import com.github.dadekuma.easypeasyrpc.resource.params.ParameterList;
+import com.github.dadekuma.easypeasyrpc.resource.params.RpcParameterList;
 
 public class RpcRequest {
     private final String method;
-    private final ParameterList params;
+    private final RpcParameterList params;
     private final String id;
     private final String jsonrpc;
 
-    public RpcRequest(String method, ParameterList params, String id, String jsonrpc) {
+    public RpcRequest(String method, RpcParameterList params, String id, String jsonrpc) {
         this.method = method;
         this.params = params;
         this.id = id;
@@ -23,7 +23,7 @@ public class RpcRequest {
         return method;
     }
 
-    public ParameterList getParams() {
+    public RpcParameterList getParams() {
         return params;
     }
 

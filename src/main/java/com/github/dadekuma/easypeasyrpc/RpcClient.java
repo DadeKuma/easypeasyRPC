@@ -5,7 +5,7 @@ import com.github.dadekuma.easypeasyrpc.exception.ErrorException;
 import com.github.dadekuma.easypeasyrpc.exception.message.GenericExceptionMessage;
 import com.github.dadekuma.easypeasyrpc.resource.RpcCommunicator;
 import com.github.dadekuma.easypeasyrpc.resource.RpcResponse;
-import com.github.dadekuma.easypeasyrpc.resource.params.ParameterList;
+import com.github.dadekuma.easypeasyrpc.resource.params.RpcParameterList;
 import com.github.dadekuma.easypeasyrpc.serialization.RequestSerializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -30,7 +30,7 @@ public abstract class RpcClient {
                 .create();
     }
 
-    public RpcResponse fulfillRequest(String methodName, ParameterList params) throws ErrorException, TimeoutException {
+    public RpcResponse fulfillRequest(String methodName, RpcParameterList params) throws ErrorException, TimeoutException {
         try {
             com.github.dadekuma.easypeasyrpc.resource.RpcRequest request = new com.github.dadekuma.easypeasyrpc.resource.RpcRequest(methodName, params, requestNumber.toString(), com.github.dadekuma.easypeasyrpc.RpcManager.RPC_VERSION);
             sendRequest(request);

@@ -6,30 +6,30 @@ import com.github.dadekuma.easypeasyrpc.exception.message.RpcExceptionMessage;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MethodList {
+public class RpcMethodList {
     private Map<String, Integer[]> methods;
 
-    public MethodList() {
+    public RpcMethodList() {
         this(new HashMap<String, Integer[]>());
     }
 
-    public MethodList(Map<String, Integer[]> methods) {
+    public RpcMethodList(Map<String, Integer[]> methods) {
         this.methods = methods;
     }
 
-    public MethodList(MethodList methodList){
+    public RpcMethodList(RpcMethodList methodList){
         methods = methodList.methods;
     }
 
-    public MethodList addMethod(String methodName){
+    public RpcMethodList addMethod(String methodName){
         return addMethod(methodName, 0);
     }
 
-    public MethodList addMethod(String methodName, int numberOfParameters){
+    public RpcMethodList addMethod(String methodName, int numberOfParameters){
         return addMethod(methodName, new Integer[]{numberOfParameters});
     }
 
-    public MethodList addMethod(String methodName, Integer[] numberOfParameters){
+    public RpcMethodList addMethod(String methodName, Integer[] numberOfParameters){
         if (methodName.startsWith("rpc.")) {
             throw new IllegalArgumentException(RpcExceptionMessage.BAD_METHOD_NAME.toString());
         }
@@ -41,12 +41,12 @@ public class MethodList {
         return this;
     }
 
-    public MethodList deleteMethod(String methodName){
+    public RpcMethodList deleteMethod(String methodName){
         methods.remove(methodName);
         return this;
     }
 
-    public MethodList deleteAll(){
+    public RpcMethodList deleteAll(){
         methods.clear();
         return this;
     }

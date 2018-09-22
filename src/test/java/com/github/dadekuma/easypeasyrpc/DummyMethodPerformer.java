@@ -1,16 +1,16 @@
 package com.github.dadekuma.easypeasyrpc;
 
 import com.github.dadekuma.easypeasyrpc.exception.ParameterOutOfBoundException;
-import com.github.dadekuma.easypeasyrpc.resource.method.MethodList;
-import com.github.dadekuma.easypeasyrpc.resource.method.MethodPerformer;
-import com.github.dadekuma.easypeasyrpc.resource.params.Element;
-import com.github.dadekuma.easypeasyrpc.resource.params.ParameterList;
+import com.github.dadekuma.easypeasyrpc.resource.method.RpcMethodList;
+import com.github.dadekuma.easypeasyrpc.resource.method.RpcMethodPerformer;
+import com.github.dadekuma.easypeasyrpc.resource.params.RpcElement;
+import com.github.dadekuma.easypeasyrpc.resource.params.RpcParameterList;
 
-public class DummyMethodPerformer implements MethodPerformer{
-    private MethodList methodList;
+public class DummyMethodPerformer implements RpcMethodPerformer {
+    private RpcMethodList methodList;
 
     public DummyMethodPerformer() {
-        methodList = new MethodList();
+        methodList = new RpcMethodList();
         methodList.addMethod("return1")
                 .addMethod("returnBiggest", new Integer[]{2, 3}) //test with overloading
                 .addMethod("returnMyParam", 1)
@@ -18,7 +18,7 @@ public class DummyMethodPerformer implements MethodPerformer{
     }
 
     @Override
-    public Element perform(String methodName, ParameterList params) throws IllegalArgumentException, ParameterOutOfBoundException {
+    public RpcElement perform(String methodName, RpcParameterList params) throws IllegalArgumentException, ParameterOutOfBoundException {
         if(methodName.equals("return1")){
             return return1();
         }
@@ -37,7 +37,7 @@ public class DummyMethodPerformer implements MethodPerformer{
 
         }
         else if(methodName.equals("returnMyParam")){
-            Element p1 = params.getParameterByPosition(0);
+            RpcElement p1 = params.getParameterByPosition(0);
             return returnMyParam(p1);
         }
 
@@ -49,34 +49,34 @@ public class DummyMethodPerformer implements MethodPerformer{
         return null;
     }
 
-    Element return1(){
-        return new Element(1);
+    RpcElement return1(){
+        return new RpcElement(1);
     }
 
-    Element returnBiggest(int p1, int p2){
+    RpcElement returnBiggest(int p1, int p2){
         if(p1 > p2)
-            return new Element(p1);
-        return new Element(p2);
+            return new RpcElement(p1);
+        return new RpcElement(p2);
     }
-    Element returnBiggest(int p1, int p2, int p3){
+    RpcElement returnBiggest(int p1, int p2, int p3){
         int max = p1;
         if(p2 > max)
             max = p2;
         if(p3 > max)
             max = p3;
-        return new Element(max);
+        return new RpcElement(max);
     }
 
-    Element returnMyParam(Element p1){
+    RpcElement returnMyParam(RpcElement p1){
         return p1;
     }
 
-    Element operateClass(DummyClass p1){
+    RpcElement operateClass(DummyClass p1){
         p1.exampleFunction();
-        return new Element(p1.getExample());
+        return new RpcElement(p1.getExample());
     }
 
-    public MethodList getMethodList() {
+    public RpcMethodList getMethodList() {
         return methodList;
     }
 }

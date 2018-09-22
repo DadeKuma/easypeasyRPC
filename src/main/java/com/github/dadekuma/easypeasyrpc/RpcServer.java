@@ -5,13 +5,13 @@ import com.github.dadekuma.easypeasyrpc.exception.ParameterOutOfBoundException;
 import com.github.dadekuma.easypeasyrpc.exception.RpcException;
 import com.github.dadekuma.easypeasyrpc.exception.message.GenericExceptionMessage;
 import com.github.dadekuma.easypeasyrpc.resource.RpcCommunicator;
-import com.github.dadekuma.easypeasyrpc.resource.method.MethodPerformer;
-import com.github.dadekuma.easypeasyrpc.resource.params.Element;
-import com.github.dadekuma.easypeasyrpc.resource.params.ParameterList;
+import com.github.dadekuma.easypeasyrpc.resource.method.RpcMethodPerformer;
+import com.github.dadekuma.easypeasyrpc.resource.params.RpcElement;
+import com.github.dadekuma.easypeasyrpc.resource.params.RpcParameterList;
 
 import java.util.concurrent.TimeoutException;
 
-public abstract class RpcServer implements MethodPerformer {
+public abstract class RpcServer implements RpcMethodPerformer {
     private RpcCommunicator communicator;
     private RpcManager jsonRPCManager;
     private boolean isRunning = true;
@@ -24,7 +24,7 @@ public abstract class RpcServer implements MethodPerformer {
     }
 
     @Override
-    public abstract Element perform(String methodName, ParameterList params) throws IllegalArgumentException, RpcException, ParameterOutOfBoundException;
+    public abstract RpcElement perform(String methodName, RpcParameterList params) throws IllegalArgumentException, RpcException, ParameterOutOfBoundException;
 
     public void runServer() throws CommunicatorException {
         if(communicator == null || jsonRPCManager == null)

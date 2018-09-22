@@ -1,16 +1,16 @@
 package com.github.dadekuma.easypeasyrpc.resource.error;
 
-import com.github.dadekuma.easypeasyrpc.resource.params.Element;
+import com.github.dadekuma.easypeasyrpc.resource.params.RpcElement;
 
-public class Error {
+public class RpcError {
     private int code;
     private String message;
-    private Element data;
+    private RpcElement data;
 
-    public Error(ErrorType errorType){
+    public RpcError(RpcErrorType errorType){
         this(errorType, null);
     }
-    public Error(ErrorType errorType, Element data) {
+    public RpcError(RpcErrorType errorType, RpcElement data) {
         switch (errorType) {
             case PARSE_ERROR:
                 setParams(-32700, "Parse error");
@@ -48,7 +48,7 @@ public class Error {
         return message;
     }
 
-    public Element getData() { return data; }
+    public RpcElement getData() { return data; }
 
     public void setMessage(String message) {
         this.message = message;

@@ -1,32 +1,32 @@
 package com.github.dadekuma.easypeasyrpc.resource;
 
-import com.github.dadekuma.easypeasyrpc.resource.error.Error;
-import com.github.dadekuma.easypeasyrpc.resource.error.ErrorType;
-import com.github.dadekuma.easypeasyrpc.resource.params.Element;
+import com.github.dadekuma.easypeasyrpc.resource.error.RpcError;
+import com.github.dadekuma.easypeasyrpc.resource.error.RpcErrorType;
+import com.github.dadekuma.easypeasyrpc.resource.params.RpcElement;
 
 public class RpcResponse {
-    private Error error;
-    private Element result;
+    private RpcError error;
+    private RpcElement result;
     private String id;
     private String jsonrpc;
 
-    public RpcResponse(ErrorType error, String id, String jsonrpc) {
-        this.error = new Error(error);
+    public RpcResponse(RpcErrorType error, String id, String jsonrpc) {
+        this.error = new RpcError(error);
         this.id = id;
         this.jsonrpc = jsonrpc;
     }
 
-    public RpcResponse(Element result, String id, String jsonrpc) {
+    public RpcResponse(RpcElement result, String id, String jsonrpc) {
         this.result = result;
         this.id = id;
         this.jsonrpc = jsonrpc;
     }
 
-    public Error getError() {
+    public RpcError getError() {
         return error;
     }
 
-    public Element getResult() {
+    public RpcElement getResult() {
         return result;
     }
 
