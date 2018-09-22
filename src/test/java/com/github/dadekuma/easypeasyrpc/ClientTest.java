@@ -1,6 +1,6 @@
 package com.github.dadekuma.easypeasyrpc;
 
-import com.github.dadekuma.easypeasyrpc.exception.ErrorException;
+import com.github.dadekuma.easypeasyrpc.exception.RpcErrorException;
 import com.github.dadekuma.easypeasyrpc.resource.params.RpcElement;
 import com.github.dadekuma.easypeasyrpc.resource.params.RpcParameterList;
 import org.junit.Assert;
@@ -20,7 +20,7 @@ public class ClientTest {
     }
 
     @Test
-    public void fulfillRequestPrimitiveParam() throws ErrorException, TimeoutException {
+    public void fulfillRequestPrimitiveParam() throws RpcErrorException, TimeoutException {
         int parameter = 1;
         RpcElement params = new RpcElement(parameter);
         RpcParameterList parameterList = new RpcParameterList(params);
@@ -35,7 +35,7 @@ public class ClientTest {
     }
 
     @Test
-    public void fulfillRequestOneClassParam() throws ErrorException, TimeoutException {
+    public void fulfillRequestOneClassParam() throws RpcErrorException, TimeoutException {
         DummyClass dummyParameter = new DummyClass(10);
         RpcElement params = new RpcElement(dummyParameter);
         RpcParameterList parameterList = new RpcParameterList(params);
@@ -50,7 +50,7 @@ public class ClientTest {
     }
 
     @Test
-    public void fulfillRequestMultipleParams() throws ErrorException, TimeoutException {
+    public void fulfillRequestMultipleParams() throws RpcErrorException, TimeoutException {
         RpcElement params = new RpcElement(1, "hello", 3.2f, true);
         RpcParameterList parameterList = new RpcParameterList(params);
         String methodName = "hello";
@@ -64,7 +64,7 @@ public class ClientTest {
     }
 
     @Test
-    public void fulfillMultipleSequentialRequest() throws ErrorException, TimeoutException{
+    public void fulfillMultipleSequentialRequest() throws RpcErrorException, TimeoutException{
         RpcElement params = new RpcElement(1, "hello", 3.2f, true);
         RpcParameterList parameterList = new RpcParameterList(params);
         String methodName = "hello";

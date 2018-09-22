@@ -1,6 +1,6 @@
 package com.github.dadekuma.easypeasyrpc;
 
-import com.github.dadekuma.easypeasyrpc.exception.CommunicatorException;
+import com.github.dadekuma.easypeasyrpc.exception.RpcCommunicatorException;
 import com.github.dadekuma.easypeasyrpc.exception.ParameterOutOfBoundException;
 import com.github.dadekuma.easypeasyrpc.exception.RpcException;
 import com.github.dadekuma.easypeasyrpc.exception.message.GenericExceptionMessage;
@@ -26,9 +26,9 @@ public abstract class RpcServer implements RpcMethodPerformer {
     @Override
     public abstract RpcElement perform(String methodName, RpcParameterList params) throws IllegalArgumentException, RpcException, ParameterOutOfBoundException;
 
-    public void runServer() throws CommunicatorException {
+    public void runServer() throws RpcCommunicatorException {
         if(communicator == null || jsonRPCManager == null)
-            throw new CommunicatorException(GenericExceptionMessage.INVALID_COMMUNICATOR.toString());
+            throw new RpcCommunicatorException(GenericExceptionMessage.INVALID_COMMUNICATOR.toString());
         try {
             while(isRunning){
                 String stringRequest = receiveRequest();
@@ -41,22 +41,22 @@ public abstract class RpcServer implements RpcMethodPerformer {
         }
     }
 
-    public String receiveRequest() throws CommunicatorException, TimeoutException{
+    public String receiveRequest() throws RpcCommunicatorException, TimeoutException{
         try {
             return communicator.receiveMsg();
         }
         catch(NullPointerException e){
-            throw new CommunicatorException(GenericExceptionMessage.INVALID_COMMUNICATOR.toString());
+            throw new RpcCommunicatorException(GenericExceptionMessage.INVALID_COMMUNICATOR.toString());
         }
     }
 
-    public void sendResponse(String response) throws CommunicatorException{
+    public void sendResponse(String response) throws RpcCommunicatorException {
         if(response != null && !response.isEmpty()) {
             try {
                 communicator.sendMsg(response);
             }
             catch (NullPointerException e) {
-                throw new CommunicatorException(GenericExceptionMessage.INVALID_COMMUNICATOR.toString());
+                throw new RpcCommunicatorException(GenericExceptionMessage.INVALID_COMMUNICATOR.toString());
             }
         }
     }

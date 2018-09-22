@@ -1,7 +1,7 @@
 package com.github.dadekuma.easypeasyrpc;
 
-import com.github.dadekuma.easypeasyrpc.exception.CommunicatorException;
-import com.github.dadekuma.easypeasyrpc.exception.ErrorException;
+import com.github.dadekuma.easypeasyrpc.exception.RpcCommunicatorException;
+import com.github.dadekuma.easypeasyrpc.exception.RpcErrorException;
 import com.github.dadekuma.easypeasyrpc.exception.message.GenericExceptionMessage;
 import com.github.dadekuma.easypeasyrpc.resource.RpcCommunicator;
 import com.github.dadekuma.easypeasyrpc.resource.RpcResponse;
@@ -30,42 +30,42 @@ public abstract class RpcClient {
                 .create();
     }
 
-    public RpcResponse fulfillRequest(String methodName, RpcParameterList params) throws ErrorException, TimeoutException {
+    public RpcResponse fulfillRequest(String methodName, RpcParameterList params) throws RpcErrorException, TimeoutException {
         try {
             com.github.dadekuma.easypeasyrpc.resource.RpcRequest request = new com.github.dadekuma.easypeasyrpc.resource.RpcRequest(methodName, params, requestNumber.toString(), com.github.dadekuma.easypeasyrpc.RpcManager.RPC_VERSION);
             sendRequest(request);
             if (!request.isNotification()) {
                 return receiveResponse();
             }
-        } catch (CommunicatorException e) {
+        } catch (RpcCommunicatorException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    private void sendRequest(com.github.dadekuma.easypeasyrpc.resource.RpcRequest request) throws CommunicatorException {
+    private void sendRequest(com.github.dadekuma.easypeasyrpc.resource.RpcRequest request) throws RpcCommunicatorException {
         try {
             ++requestNumber;
             String stringRequest = gson.toJson(request);
             communicator.sendMsg(stringRequest);
         } catch (NullPointerException e) {
-            throw new CommunicatorException(GenericExceptionMessage.INVALID_COMMUNICATOR.toString());
+            throw new RpcCommunicatorException(GenericExceptionMessage.INVALID_COMMUNICATOR.toString());
         }
     }
 
 
-    private RpcResponse receiveResponse() throws CommunicatorException, ErrorException, TimeoutException {
+    private RpcResponse receiveResponse() throws RpcCommunicatorException, RpcErrorException, TimeoutException {
         try {
             String stringResponse = communicator.receiveMsg();
             RpcResponse response = gson.fromJson(stringResponse, RpcResponse.class);
             if (response.getError() != null)
-                throw new ErrorException(response.getError());
+                throw new RpcErrorException(response.getError());
             return response;
         } catch (TimeoutException e) {
             communicator.dispose();
             throw e;
         } catch (NullPointerException e) {
-            throw new CommunicatorException(GenericExceptionMessage.INVALID_COMMUNICATOR.toString());
+            throw new RpcCommunicatorException(GenericExceptionMessage.INVALID_COMMUNICATOR.toString());
         }
     }
 
