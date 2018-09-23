@@ -2,6 +2,7 @@ package com.github.dadekuma.easypeasyrpc;
 
 import com.github.dadekuma.easypeasyrpc.exception.ParameterOutOfBoundException;
 import com.github.dadekuma.easypeasyrpc.exception.RpcException;
+import com.github.dadekuma.easypeasyrpc.resource.RpcRequest;
 import com.github.dadekuma.easypeasyrpc.resource.RpcResponse;
 import com.github.dadekuma.easypeasyrpc.resource.error.RpcError;
 import com.github.dadekuma.easypeasyrpc.resource.error.RpcErrorType;
@@ -92,7 +93,7 @@ public class RpcManager {
     private JsonElement parseSingleRequest(JsonElement singleRequest){
         JsonObject jsonObject = singleRequest.getAsJsonObject();
         try {
-            com.github.dadekuma.easypeasyrpc.resource.RpcRequest request = decodeRequest(jsonObject);
+            RpcRequest request = decodeRequest(jsonObject);
             if(!request.isNotification()){
                 RpcResponse response = compileResponse(request);
                 return gson.toJsonTree(response);
@@ -105,9 +106,9 @@ public class RpcManager {
         return null;
     }
 
-    private com.github.dadekuma.easypeasyrpc.resource.RpcRequest decodeRequest(JsonObject jsonObject) throws RpcException {
+    private RpcRequest decodeRequest(JsonObject jsonObject) throws RpcException {
         try {
-            com.github.dadekuma.easypeasyrpc.resource.RpcRequest request = gson.fromJson(jsonObject, com.github.dadekuma.easypeasyrpc.resource.RpcRequest.class);
+            RpcRequest request = gson.fromJson(jsonObject, RpcRequest.class);
             if(request.getJsonRPC() == null || !request.getJsonRPC().equals("2.0"))
                 throw new RpcException(RpcErrorType.INVALID_REQUEST);
             return request;
@@ -117,7 +118,7 @@ public class RpcManager {
         }
     }
 
-    private RpcResponse compileResponse(com.github.dadekuma.easypeasyrpc.resource.RpcRequest request){
+    private RpcResponse compileResponse(RpcRequest request){
         String requestMethod = request.getMethod();
         RpcParameterList params = request.getParams();
         //method not found

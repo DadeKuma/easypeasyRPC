@@ -5,6 +5,7 @@ import com.github.dadekuma.easypeasyrpc.exception.RpcErrorException;
 import com.github.dadekuma.easypeasyrpc.exception.message.GenericExceptionMessage;
 import com.github.dadekuma.easypeasyrpc.resource.RpcCommunicator;
 import com.github.dadekuma.easypeasyrpc.resource.RpcResponse;
+import com.github.dadekuma.easypeasyrpc.resource.RpcRequest;
 import com.github.dadekuma.easypeasyrpc.resource.params.RpcParameterList;
 import com.github.dadekuma.easypeasyrpc.serialization.RequestSerializer;
 import com.google.gson.Gson;
@@ -26,13 +27,13 @@ public abstract class RpcClient {
         this.communicator = communicator;
         requestNumber = 0;
         gson = new GsonBuilder()
-                .registerTypeAdapter(com.github.dadekuma.easypeasyrpc.resource.RpcRequest.class, new RequestSerializer())
+                .registerTypeAdapter(RpcRequest.class, new RequestSerializer())
                 .create();
     }
 
     public RpcResponse fulfillRequest(String methodName, RpcParameterList params) throws RpcErrorException, TimeoutException {
         try {
-            com.github.dadekuma.easypeasyrpc.resource.RpcRequest request = new com.github.dadekuma.easypeasyrpc.resource.RpcRequest(methodName, params, requestNumber.toString(), com.github.dadekuma.easypeasyrpc.RpcManager.RPC_VERSION);
+            RpcRequest request = new RpcRequest(methodName, params, requestNumber.toString(), RpcManager.RPC_VERSION);
             sendRequest(request);
             if (!request.isNotification()) {
                 return receiveResponse();
@@ -43,7 +44,7 @@ public abstract class RpcClient {
         return null;
     }
 
-    private void sendRequest(com.github.dadekuma.easypeasyrpc.resource.RpcRequest request) throws RpcCommunicatorException {
+    private void sendRequest(RpcRequest request) throws RpcCommunicatorException {
         try {
             ++requestNumber;
             String stringRequest = gson.toJson(request);
